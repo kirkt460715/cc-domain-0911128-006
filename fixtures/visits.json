@@ -1,0 +1,390 @@
+{
+  "version": 1,
+  "services": [
+    {
+      "id": "care",
+      "response_seconds": 1800,
+      "minimum_active_seconds": 1800,
+      "maximum_active_seconds": 7200
+    }
+  ],
+  "workers": [
+    {
+      "id": "w1",
+      "region": "east",
+      "daily_regular_seconds": 28800
+    },
+    {
+      "id": "w2",
+      "region": "west",
+      "daily_regular_seconds": 28800
+    }
+  ],
+  "visits": [
+    {
+      "id": "v1",
+      "client": "client-v1",
+      "service": "care",
+      "region": "east",
+      "requested_at": "2026-11-10T08:00:00Z",
+      "promised_start": "2026-11-10T09:00:00Z",
+      "parent": null
+    },
+    {
+      "id": "v2",
+      "client": "client-v2",
+      "service": "care",
+      "region": "east",
+      "requested_at": "2026-11-10T09:00:00Z",
+      "promised_start": "2026-11-10T10:00:00Z",
+      "parent": null
+    },
+    {
+      "id": "cancel",
+      "client": "client-cancel",
+      "service": "care",
+      "region": "west",
+      "requested_at": "2026-11-10T10:00:00Z",
+      "promised_start": "2026-11-10T11:00:00Z",
+      "parent": null
+    },
+    {
+      "id": "retry",
+      "client": "client-cancel",
+      "service": "care",
+      "region": "west",
+      "requested_at": "2026-11-10T11:00:00Z",
+      "promised_start": "2026-11-10T12:00:00Z",
+      "parent": "cancel"
+    },
+    {
+      "id": "open",
+      "client": "client-open",
+      "service": "care",
+      "region": "west",
+      "requested_at": "2026-11-10T12:00:00Z",
+      "promised_start": "2026-11-10T13:00:00Z",
+      "parent": null
+    },
+    {
+      "id": "night",
+      "client": "client-night",
+      "service": "care",
+      "region": "west",
+      "requested_at": "2026-11-10T22:00:00Z",
+      "promised_start": "2026-11-10T23:00:00Z",
+      "parent": null
+    }
+  ],
+  "shifts": [
+    {
+      "id": "s1",
+      "worker": "w1",
+      "start": "2026-11-10T08:00:00Z",
+      "end": "2026-11-10T17:00:00Z",
+      "breaks": [
+        {
+          "start": "2026-11-10T12:00:00Z",
+          "end": "2026-11-10T13:00:00Z"
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "worker": "w2",
+      "start": "2026-11-10T22:00:00Z",
+      "end": "2026-11-11T06:00:00Z",
+      "breaks": []
+    }
+  ],
+  "events": [
+    {
+      "id": "v1-1",
+      "revision": 1,
+      "visit": "v1",
+      "sequence": 1,
+      "effective_at": "2026-11-10T08:10:00Z",
+      "observed_at": "2026-11-10T08:10:00Z",
+      "kind": "accepted",
+      "worker": "w1",
+      "reason": null,
+      "void": false
+    },
+    {
+      "id": "v1-2",
+      "revision": 1,
+      "visit": "v1",
+      "sequence": 2,
+      "effective_at": "2026-11-10T08:20:00Z",
+      "observed_at": "2026-11-10T08:20:00Z",
+      "kind": "departed",
+      "worker": "w1",
+      "reason": null,
+      "void": false
+    },
+    {
+      "id": "v1-3",
+      "revision": 1,
+      "visit": "v1",
+      "sequence": 3,
+      "effective_at": "2026-11-10T08:50:00Z",
+      "observed_at": "2026-11-10T08:50:00Z",
+      "kind": "arrived",
+      "worker": "w1",
+      "reason": null,
+      "void": false
+    },
+    {
+      "id": "v1-4",
+      "revision": 1,
+      "visit": "v1",
+      "sequence": 4,
+      "effective_at": "2026-11-10T09:00:00Z",
+      "observed_at": "2026-11-10T09:00:00Z",
+      "kind": "started",
+      "worker": "w1",
+      "reason": null,
+      "void": false
+    },
+    {
+      "id": "v1-5",
+      "revision": 1,
+      "visit": "v1",
+      "sequence": 5,
+      "effective_at": "2026-11-10T09:30:00Z",
+      "observed_at": "2026-11-10T09:30:00Z",
+      "kind": "paused",
+      "worker": "w1",
+      "reason": "client_break",
+      "void": false
+    },
+    {
+      "id": "v1-6",
+      "revision": 1,
+      "visit": "v1",
+      "sequence": 6,
+      "effective_at": "2026-11-10T09:40:00Z",
+      "observed_at": "2026-11-10T09:40:00Z",
+      "kind": "resumed",
+      "worker": "w1",
+      "reason": null,
+      "void": false
+    },
+    {
+      "id": "v1-7",
+      "revision": 1,
+      "visit": "v1",
+      "sequence": 7,
+      "effective_at": "2026-11-10T10:10:00Z",
+      "observed_at": "2026-11-10T10:10:00Z",
+      "kind": "completed",
+      "worker": "w1",
+      "reason": null,
+      "void": false
+    },
+    {
+      "id": "v2-1",
+      "revision": 1,
+      "visit": "v2",
+      "sequence": 1,
+      "effective_at": "2026-11-10T09:10:00Z",
+      "observed_at": "2026-11-10T09:10:00Z",
+      "kind": "accepted",
+      "worker": "w1",
+      "reason": null,
+      "void": false
+    },
+    {
+      "id": "v2-2",
+      "revision": 1,
+      "visit": "v2",
+      "sequence": 2,
+      "effective_at": "2026-11-10T09:20:00Z",
+      "observed_at": "2026-11-10T09:20:00Z",
+      "kind": "departed",
+      "worker": "w1",
+      "reason": null,
+      "void": false
+    },
+    {
+      "id": "v2-3",
+      "revision": 1,
+      "visit": "v2",
+      "sequence": 3,
+      "effective_at": "2026-11-10T09:50:00Z",
+      "observed_at": "2026-11-10T09:50:00Z",
+      "kind": "arrived",
+      "worker": "w1",
+      "reason": null,
+      "void": false
+    },
+    {
+      "id": "v2-4",
+      "revision": 1,
+      "visit": "v2",
+      "sequence": 4,
+      "effective_at": "2026-11-10T10:00:00Z",
+      "observed_at": "2026-11-10T10:00:00Z",
+      "kind": "started",
+      "worker": "w1",
+      "reason": null,
+      "void": false
+    },
+    {
+      "id": "v2-5",
+      "revision": 1,
+      "visit": "v2",
+      "sequence": 5,
+      "effective_at": "2026-11-10T10:40:00Z",
+      "observed_at": "2026-11-10T10:40:00Z",
+      "kind": "completed",
+      "worker": "w1",
+      "reason": null,
+      "void": false
+    },
+    {
+      "id": "cancel-1",
+      "revision": 1,
+      "visit": "cancel",
+      "sequence": 1,
+      "effective_at": "2026-11-10T10:20:00Z",
+      "observed_at": "2026-11-10T10:20:00Z",
+      "kind": "cancelled",
+      "worker": null,
+      "reason": "provider",
+      "void": false
+    },
+    {
+      "id": "retry-1",
+      "revision": 1,
+      "visit": "retry",
+      "sequence": 1,
+      "effective_at": "2026-11-10T11:10:00Z",
+      "observed_at": "2026-11-10T11:10:00Z",
+      "kind": "accepted",
+      "worker": "w2",
+      "reason": null,
+      "void": false
+    },
+    {
+      "id": "retry-2",
+      "revision": 1,
+      "visit": "retry",
+      "sequence": 2,
+      "effective_at": "2026-11-10T11:20:00Z",
+      "observed_at": "2026-11-10T11:20:00Z",
+      "kind": "departed",
+      "worker": "w2",
+      "reason": null,
+      "void": false
+    },
+    {
+      "id": "retry-3",
+      "revision": 1,
+      "visit": "retry",
+      "sequence": 3,
+      "effective_at": "2026-11-10T11:50:00Z",
+      "observed_at": "2026-11-10T11:50:00Z",
+      "kind": "arrived",
+      "worker": "w2",
+      "reason": null,
+      "void": false
+    },
+    {
+      "id": "retry-4",
+      "revision": 1,
+      "visit": "retry",
+      "sequence": 4,
+      "effective_at": "2026-11-10T12:00:00Z",
+      "observed_at": "2026-11-10T12:00:00Z",
+      "kind": "started",
+      "worker": "w2",
+      "reason": null,
+      "void": false
+    },
+    {
+      "id": "retry-5",
+      "revision": 1,
+      "visit": "retry",
+      "sequence": 5,
+      "effective_at": "2026-11-10T13:00:00Z",
+      "observed_at": "2026-11-10T13:00:00Z",
+      "kind": "completed",
+      "worker": "w2",
+      "reason": null,
+      "void": false
+    },
+    {
+      "id": "open-1",
+      "revision": 1,
+      "visit": "open",
+      "sequence": 1,
+      "effective_at": "2026-11-10T12:40:00Z",
+      "observed_at": "2026-11-10T12:40:00Z",
+      "kind": "accepted",
+      "worker": "w2",
+      "reason": null,
+      "void": false
+    },
+    {
+      "id": "night-1",
+      "revision": 1,
+      "visit": "night",
+      "sequence": 1,
+      "effective_at": "2026-11-10T22:10:00Z",
+      "observed_at": "2026-11-10T22:10:00Z",
+      "kind": "accepted",
+      "worker": "w2",
+      "reason": null,
+      "void": false
+    },
+    {
+      "id": "night-2",
+      "revision": 1,
+      "visit": "night",
+      "sequence": 2,
+      "effective_at": "2026-11-10T22:20:00Z",
+      "observed_at": "2026-11-10T22:20:00Z",
+      "kind": "departed",
+      "worker": "w2",
+      "reason": null,
+      "void": false
+    },
+    {
+      "id": "night-3",
+      "revision": 1,
+      "visit": "night",
+      "sequence": 3,
+      "effective_at": "2026-11-10T22:50:00Z",
+      "observed_at": "2026-11-10T22:50:00Z",
+      "kind": "arrived",
+      "worker": "w2",
+      "reason": null,
+      "void": false
+    },
+    {
+      "id": "night-4",
+      "revision": 1,
+      "visit": "night",
+      "sequence": 4,
+      "effective_at": "2026-11-10T23:00:00Z",
+      "observed_at": "2026-11-10T23:00:00Z",
+      "kind": "started",
+      "worker": "w2",
+      "reason": null,
+      "void": false
+    },
+    {
+      "id": "night-5",
+      "revision": 1,
+      "visit": "night",
+      "sequence": 5,
+      "effective_at": "2026-11-11T01:00:00Z",
+      "observed_at": "2026-11-11T01:00:00Z",
+      "kind": "completed",
+      "worker": "w2",
+      "reason": null,
+      "void": false
+    }
+  ]
+}
